@@ -6,7 +6,6 @@ describe("calculatorService", () => {
   let calculator: CalculatorService, loggerSpy: any;
 
   beforeEach(() => {
-    console.log("calling beforeEach");
     loggerSpy = jasmine.createSpyObj("LoggerService", ["log"]);
 
     TestBed.configureTestingModule({
