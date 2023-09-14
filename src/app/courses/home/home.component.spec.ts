@@ -70,14 +70,12 @@ describe("HomeComponent", () => {
     expect(tabs.length).toBe(2, "Unexpected number of tabs found");
   });
 
-  fit("should display advanced courses when tab clicked", (done: DoneFn) => {
+  it("should display advanced courses when tab clicked", (done: DoneFn) => {
     coursesService.findAllCourses.and.returnValue(of(setupCourses()));
 
     fixture.detectChanges();
 
     const tabs = el.queryAll(By.css(".mdc-tab"));
-
-    console.log("tabs = ", tabs);
 
     click(tabs[1]);
 
@@ -89,6 +87,9 @@ describe("HomeComponent", () => {
     // 因此需要用 setTimeout 來解，不然就算 detectChanges 刷新後
     // 還是會抓到舊的dom
     setTimeout(() => {
+      // 我也不知道為什麼，但要refresh兩次  QQ
+      fixture.detectChanges();
+
       const cardTitles = el.queryAll(By.css(".mat-mdc-card-title"));
 
       expect(cardTitles.length).toBeGreaterThan(
